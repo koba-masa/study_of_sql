@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  postgresql:
+    image: postgres:14.6
+    environment:
+      POSTGRES_USERNAME: postgres
+      POSTGRES_PASSWORD: postgres123
+      POSTGRES_INITDB_ARGS: "-E UTF8"
+      POSTGRES_DB: 'play_with_sql'
+      TZ: "Asia/Tokyo"
+    volumes:
+      - db_postgresql:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+  mysql:
+    image: mysql:5.7
+    platform: linux/x86_64
+    volumes:
+      - db_mysql:/var/lib/mysql/
+    environment:
+      TZ: 'Asia/Tokyo'
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: "play_with_sql"
+    ports:
+      - "3306:3306"
+
+volumes:
+  db_postgresql:
+  db_mysql:
